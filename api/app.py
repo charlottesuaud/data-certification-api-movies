@@ -37,11 +37,11 @@ def predict(original_title, title, release_date, duration_min,
         'all_genres': all_genres,
         'top_countries': top_countries,
         'number_of_top_productions': float(number_of_top_productions),
-        'available_in_english': eng_dict[available_in_english]
+        'available_in_english': bool(available_in_english)
     }
     model = load('model.joblib')
     X_true = pd.DataFrame.from_dict(X_dict)
-    popularity = model.predict(X_true)[0]
+    popularity = int(model.predict(X_true))
     return {
         'title': title,
         'popularity': popularity
